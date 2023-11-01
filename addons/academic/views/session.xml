@@ -14,6 +14,7 @@
                     <field name="seats"/>
                     <field name="taken_seats" widget="progressbar"/>
                     <field name="active"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -24,6 +25,12 @@
             <field name="model">academic.session</field>
             <field name="arch" type="xml">
                 <form string="Session">
+                    <header>
+                        <button string="Confirm" type="object" states="draft" name="action_confirm"/>
+                        <button string="Mark as Done" type="object" states="confirmed" name="action_done"/>
+                        <button string="Reset to Draft" type="object" states="confirmed" name="action_draft"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only" string="Session Name"/>
