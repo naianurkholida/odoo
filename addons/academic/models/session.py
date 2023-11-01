@@ -1,6 +1,7 @@
 from odoo import api, fields, models, exceptions
 from datetime import date
 
+STATES=[('draft','Draft'),('confirmed', 'Confirmed'),('done','Done')]
 class Session(models.Model):
     _name = "academic.session"
 
@@ -26,6 +27,8 @@ class Session(models.Model):
     taken_seats = fields.Float(string="Taken Seats", compute="_compute_taken_seats")
 
     image_small = fields.Binary("Image")
+
+    state = fields.Selection(string="State", selection=STATES, readonly=True, required=True, default=[0][0])
 
     # @api.depends('attendee_ids')
     def _compute_taken_seats(self):
@@ -55,3 +58,12 @@ class Session(models.Model):
         #modif field name
         default =dict(default or {}, name=self.name + " (copy)")
         return super(Session, self).copy(default=default)
+    
+    def action_confirm(self):
+        self.state = STATES[1][0]
+
+    def action_done(self):
+        self.state = STATES[2][0]
+
+    def action_draft(self):
+        self.state = STATES[1][0]
