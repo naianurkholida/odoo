@@ -66,4 +66,9 @@ class Session(models.Model):
         self.state = STATES[2][0]
 
     def action_draft(self):
-        self.state = STATES[1][0]
+        self.state = STATES[0][0]
+
+    @api.model
+    def create(self, vals):
+        vals['state'] = 'draft'
+        return super(Session, self).create(vals)
