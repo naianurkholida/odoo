@@ -26,9 +26,9 @@
             <field name="arch" type="xml">
                 <form string="Session">
                     <header>
-                        <button string="Confirm" type="object" states="draft" name="action_confirm"/>
-                        <button string="Mark as Done" type="object" states="confirmed" name="action_done"/>
-                        <button string="Reset to Draft" type="object" states="confirmed" name="action_draft"/>
+                        <button string="Confirm" type="workflow" states="draft" group="group_academic_user" name="action_confirm"/>
+                        <button string="Mark as Done" type="workflow" states="confirmed" group="group_academic_manager" name="action_done"/>
+                        <button string="Reset to Draft" type="workflow" states="confirmed" group="group_academic_manager" name="action_draft"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -43,7 +43,7 @@
                                 <field name="course_id"/>
                                 <field name="instructor_id" domain="['|',('is_instructor','=',True),('category_id','ilike','pelatih')]"/>
                                 <field name="start_date"/>
-                                <field name="image_small" widget="image" class="oe_left oe_avatar"/>
+                                <field name="image_small" widget="image" class="oe_left oe_avatar" groups="academic.group_academic_user"/>
                             </group>
                             <group>
                                 <field name="duration"/>

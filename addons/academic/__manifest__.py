@@ -10,6 +10,7 @@
         'views/session.xml',
         'views/attendee.xml',
         'views/partner.xml',
+        'security/group.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
