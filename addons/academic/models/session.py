@@ -7,18 +7,28 @@ class Session(models.Model):
 
     # def cari_tanggal(self0:
     #     return
+    is_draft_state = fields.Boolean(string="Is Draft State", compute="_compute_is_draft_state", store=True)
 
-    name = fields.Char("Name", required=True, size=100)
+    @api.depends('state')
+    def _compute_is_draft_state(self):
+        for record in self:
+            record.is_draft_state = record.state == 'draft'
 
-    course_id = fields.Many2one(comodel_name="academic.course", string="Course")
+    name = fields.Char("Name", required=True, size=100, 
+                      readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
-    instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor")
+    course_id = fields.Many2one(comodel_name="academic.course", string="Course", 
+                               readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
-    start_date = fields.Date("Start Date", default=lambda self:date.today())
+    instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor", 
+                                  readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
-    duration = fields.Integer("Duration")
+    start_date = fields.Date("Start Date", readonly=False, 
+                            states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
-    seats = fields.Integer("Seats")
+    duration = fields.Integer("Duration", readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
+
+    seats = fields.Integer("Seats", readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
     active = fields.Boolean("Is Active", default=True)
 
@@ -26,7 +36,7 @@ class Session(models.Model):
     
     taken_seats = fields.Float(string="Taken Seats", compute="_compute_taken_seats")
 
-    image_small = fields.Binary("Image")
+    image_small = fields.Binary("Image", readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
     state = fields.Selection(string="State", selection=STATES, readonly=True, required=True, default=[0][0])
 

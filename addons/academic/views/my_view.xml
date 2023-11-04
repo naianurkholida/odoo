@@ -44,6 +44,7 @@
                                     <field name="duration"/>
                                     <field name="seats"/>
                                     <field name="active"/>
+                                    <field name="state"/>
                                 </tree>
                                 <form>
                                     <group>
@@ -53,6 +54,7 @@
                                         <field name="duration"/>
                                         <field name="seats"/>
                                         <field name="active"/>
+                                        <field name="state"/>
                                     </group>
                                 </form>
                             </field>
