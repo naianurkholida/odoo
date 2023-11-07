@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+        <report id="report_session_menu" string="Session" model="academic.session" report_type="qweb-pdf" file="academic.session" name="academic.session_report"/>
+
+        <template id="session_report" >
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <style>
+                            .custom-table{
+                                width:100%;
+                                border-collapse: collapse;
+                            }
+
+                            .custom-table th, .custom-table td{
+                                border-top: 1px solid #000;
+                                padding: 5px;
+                            }
+                            .custom-table th{
+                                text-align:left;
+                            }
+                        </style>
+                        <div class="page">
+                            <h2>
+                                <strong>
+                                    <span t-field="o.name"/>
+                                </strong>
+                            </h2>
+                            
+                            <table class="custom-table">
+                                <tr>
+                                    <td>Course</td>
+                                    <td><span t-field="o.course_id"/></td>
+                                    <td>Duration</td>
+                                    <td><span t-field="o.duration"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Instructor</td>
+                                    <td><span t-field="o.instructor_id"/></td>
+                                    <td>Seats</td>
+                                    <td><span t-field="o.seats"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td><span t-field="o.start_date"/></td>
+                                    <td>Taken Seats</td>
+                                    <td><span t-field="o.taken_seats"/></td>
+                                </tr>
+                            </table>
+
+                            <h3>Attendees</h3>
+                            <table class="custom-table">
+                                <tr>
+                                    <th>Reg Number</th>
+                                    <th>Partner</th>
+                                </tr>
+                                <tr t-foreach="o.attendee_ids" t-as="att">
+                                    <td><span t-field="att.name"/></td>
+                                    <td><span t-field="att.partner_id"/></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
