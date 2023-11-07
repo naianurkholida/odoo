@@ -12,6 +12,7 @@
         'views/partner.xml',
         'security/group.xml',
         'security/ir.model.access.csv',
+        'report/session.xml'
     ],
     'installable': True,
     'auto_install': False,
