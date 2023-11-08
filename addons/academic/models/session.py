@@ -38,7 +38,18 @@ class Session(models.Model):
 
     image_small = fields.Binary("Image", readonly=False, states={'confirmed': [('readonly', True)], 'done': [('readonly', True)]})
 
-    state = fields.Selection(string="State", selection=STATES, readonly=True, required=True, default=[0][0])
+    state = fields.Selection(string="State", selection=STATES, readonly=True, default=STATES[0][0])
+
+
+    action_session_dashboard={
+        'type': 'ir.actions.act_window',
+        'name':'Session Dashboard',
+        'res_model': 'academic.session',
+        'view_mode':'graph',
+        'view_id':False,
+        'view_type':'form',
+        'help': 'Graph showing the number of sessions per instructor',
+    }
 
     # @api.depends('attendee_ids')
     def _compute_taken_seats(self):

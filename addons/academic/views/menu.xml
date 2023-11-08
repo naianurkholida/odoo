@@ -48,9 +48,18 @@
             <field name="context">{"search_default_instructor":1}</field>
         </record>
 
+        <!-- action dashboard -->
+        <record id="action_session_dashboard" model="ir.actions.act_window">
+            <field name="name">Session Dashboard</field>
+            <field name="res_model">academic.session</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_academic_session_dashboard"/>
+        </record>
+
 
 
         <menuitem id="academic_0" name="Academic" sequence="20"/>
+        <menuitem id="menu_academic_dashboard" name="Dashboard" parent="academic_0" action="action_session_dashboard" sequence="1"/>
         <menuitem id="academic_1" name="Academic" parent="academic_0" sequence="20"/>
         <menuitem id="menu_academic_course" name="Course" parent="academic_1" action="action_course_list" sequence="20"/>
         <menuitem id="menu_academic_session" name="Session" parent="academic_1" action="action_session_list" sequence="20"/>
