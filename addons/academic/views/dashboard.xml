@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- graph session-->
+        <record id="view_academic_session_dashboard" model="ir.ui.view">
+            <field name="name">view_academic_session_dashboard</field>
+            <field name="model">academic.session</field>
+            <field name="arch" type="xml">
+                <graph string="Session" type="bar">
+                    <field name="instructor_id"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+
+</odoo>
